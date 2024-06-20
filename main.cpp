@@ -3,7 +3,7 @@
 int main()
 {
     App app;
-    app.setup(1440, 1040, "PATHFINDING");
+    app.setup(1680, 1000, "PATHFINDING");
     app.run();
     return 0;
 }
