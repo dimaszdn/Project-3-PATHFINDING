@@ -20,19 +20,18 @@ private:
     size_t mapSizeY{};
     size_t mapSizeX{};
 
-
     sf::Vector2i start{};
     sf::Vector2i finish{};
 
 public:
-    explicit Map(sf::RenderWindow& window) : mWindow(window)
+    explicit Map(sf::RenderWindow& window, int menuW) : mWindow(window)
     {
         cellSize = 40;
         blockStart = false;
         blockFinish = false;
         start = {-1, -1};
         finish = {-1, -1};
-        mapSizeX = (mWindow.getSize().x - 400) / cellSize;
+        mapSizeX = (mWindow.getSize().x - menuW) / cellSize;
         mapSizeY = mWindow.getSize().y / cellSize;
         map.resize(mapSizeY, std::vector<CELL>(mapSizeX, CELL::EMPTY));
     }
