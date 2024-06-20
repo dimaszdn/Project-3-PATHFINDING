@@ -27,6 +27,10 @@ add_executable("${PROJECT_NAME}" main.cpp
 		inc/BFS.h
 		src/BFS.cpp
 		inc/Status.h
+		inc/Info.h
+		inc/Menu.h
+		inc/FloatToString.h
+		src/Menu.cpp
 
 )
 											
@@ -44,3 +48,5 @@ target_link_libraries("${PROJECT_NAME}" sfml-graphics-s-d
 						  vorbisfile
 						  vorbis
 						  ogg)
+
+file(COPY "files" DESTINATION /)
