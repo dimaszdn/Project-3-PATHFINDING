@@ -17,7 +17,9 @@ private:
     bool blockFinish{};
 
     int cellSize{};
-    size_t mapSize{};
+    size_t mapSizeY{};
+    size_t mapSizeX{};
+
 
     sf::Vector2i start{};
     sf::Vector2i finish{};
@@ -30,13 +32,19 @@ public:
         blockFinish = false;
         start = {-1, -1};
         finish = {-1, -1};
-        mapSize = mWindow.getSize().y / cellSize;
-        map.resize(mapSize, std::vector<CELL>(mapSize, CELL::EMPTY));
+        mapSizeX = (mWindow.getSize().x - 400) / cellSize;
+        mapSizeY = mWindow.getSize().y / cellSize;
+        map.resize(mapSizeY, std::vector<CELL>(mapSizeX, CELL::EMPTY));
     }
 
-    [[nodiscard]] size_t getMapSize() const
+    [[nodiscard]] size_t getMapSizeY() const
     {
-        return mapSize;
+        return mapSizeY;
+    }
+
+    [[nodiscard]] size_t getMapSizeX() const
+    {
+        return mapSizeX;
     }
 
     [[nodiscard]] sf::Vector2i getStart() const

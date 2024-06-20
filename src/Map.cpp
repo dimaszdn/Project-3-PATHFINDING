@@ -4,7 +4,7 @@ sf::Vector2i Map::getCellPos()
 {
     sf::Vector2i cellPos = {-1, -1};
     sf::Vector2i mouse = sf::Mouse::getPosition(mWindow);
-    if ((0 <= mouse.x && mouse.x < mapSize * cellSize) && (0 <= mouse.y && mouse.y < mapSize * cellSize))
+    if ((0 <= mouse.x && mouse.x < mapSizeX * cellSize) && (0 <= mouse.y && mouse.y < mapSizeY * cellSize))
     {
         cellPos.x = floor(mouse.x / cellSize);
         cellPos.y = floor(mouse.y / cellSize);
@@ -23,7 +23,14 @@ void Map::inputUser()
             map[cellPos.y][cellPos.x] = CELL::WALL;
 
         else if (1 == sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
+        {
+            if (cellPos == finish)
+                blockFinish = false;
+            else if (cellPos == start)
+                blockStart = false;
+
             map[cellPos.y][cellPos.x] = CELL::EMPTY;
+        }
 
         else if (!blockStart && sf::Keyboard::isKeyPressed(sf::Keyboard::S) && cellPos != finish)
         {
@@ -47,9 +54,9 @@ void Map::draw()
     cell.setOutlineThickness(2.5);
     cell.setOutlineColor(sf::Color(128, 128, 128));
 
-    for (int y = 0; y < map.size(); ++y)
+    for (int y = 0; y < mapSizeY; ++y)
     {
-        for (int x = 0; x < map[y].size(); ++x)
+        for (int x = 0; x < mapSizeX; ++x)
         {
             cell.setPosition(x * cellSize, y * cellSize);
             switch (map[y][x])
