@@ -25,15 +25,15 @@ private:
     sf::Time allTime;
 
 public:
-    BFS(Map& map) : mMap(map), status(STATUS::PROCESS)
+    explicit BFS(Map& map) : mMap(map), status(STATUS::PROCESS)
     {
-        dist.resize(map.getMapSize(), std::vector<int>(map.getMapSize(), -1));
-        parents.resize(map.getMapSize(), std::vector<sf::Vector2i>(map.getMapSize()));
+        dist.resize(map.getMapSizeY(), std::vector<int>(map.getMapSizeX(), -1));
+        parents.resize(map.getMapSizeY(), std::vector<sf::Vector2i>(map.getMapSizeX()));
     }
 
     bool insideInMap(const sf::Vector2i& pos)
     {
-        if ((0 <= pos.x && pos.x < mMap.getMapSize()) && (0 <= pos.y && pos.y < mMap.getMapSize()))
+        if ((0 <= pos.x && pos.x < mMap.getMapSizeX()) && (0 <= pos.y && pos.y < mMap.getMapSizeY()))
             return true;
         return false;
     }
