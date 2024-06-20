@@ -1,7 +1,8 @@
 #include <App.h>
 #include <Status.h>
+#include <FloatToString.h>
 
-void App::logic(BFS &bfs)
+void App::logic(BFS& bfs, Menu& menu)
 {
     if (startBfsButtonIsPressed)
     {
@@ -12,12 +13,14 @@ void App::logic(BFS &bfs)
             case STATUS::SUCCESS:
                 startBfsButtonIsPressed = false;
                 bfs.showPath();
-                std::cout << "Short dist: " << bfs.getShortDist() << "\n";
-                std::cout << "Time work: " << bfs.getWorkTime() << "\n";
+                menu.setupBfsInfo("Path length: " + std::to_string(bfs.getShortDist()) +
+                                      "\nTime spent: " + floatToString(bfs.getWorkTime(), 3));
                 break;
+
             case STATUS::FAIL:
                 startBfsButtonIsPressed = false;
                 break;
+
             case STATUS::PROCESS:
                 bfs.search();
                 break;
@@ -27,13 +30,15 @@ void App::logic(BFS &bfs)
 
 void App::run()
 {
-    Map map(mWindow);
+
+    Map map(mWindow, mMenuW);
     BFS bfs(map);
+
+    Menu menu({mMenuW, mMenuH}, mWindow);
+    menu.setupTitle("INFO");
 
     while (mWindow.isOpen())
     {
-        sf::Event event{};
-
         while (mWindow.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
@@ -46,17 +51,17 @@ void App::run()
                 startBfsButtonIsPressed = true;
 
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space)
-            {
                 startBfsButtonIsPressed = false;
-            }
         }
 
-        this->logic(bfs);
+        this->logic(bfs, menu);
 
         mWindow.clear(fontColor);
 
-        map.draw();
         map.inputUser();
+
+        menu.draw();
+        map.draw();
 
         mWindow.display();
     }
