@@ -27,10 +27,11 @@ add_executable("${PROJECT_NAME}" main.cpp
 		inc/BFS.h
 		src/BFS.cpp
 		inc/Status.h
-		inc/Info.h
+		inc/WindowText.h
 		inc/Menu.h
 		inc/FloatToString.h
 		src/Menu.cpp
+		inc/Button.h
 
 )
 											
