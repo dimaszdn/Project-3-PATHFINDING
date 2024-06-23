@@ -5,7 +5,6 @@
 #include <SFML/Graphics.hpp>
 #include <Map.h>
 #include <BFS.h>
-#include <Info.h>
 #include <Menu.h>
 
 class App
@@ -18,6 +17,7 @@ private:
     int mMenuW{};
     int mMenuH{};
     bool startBfsButtonIsPressed = false;
+    bool exitButtonIsPressed = false;
 
 public:
     App() = default;
