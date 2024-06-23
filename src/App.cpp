@@ -13,12 +13,14 @@ void App::logic(BFS& bfs, Menu& menu)
             case STATUS::SUCCESS:
                 startBfsButtonIsPressed = false;
                 bfs.showPath();
-                menu.setupBfsInfo("Path length: " + std::to_string(bfs.getShortDist()) +
-                                      "\nTime spent: " + floatToString(bfs.getWorkTime(), 3));
+                menu.setBfsInfo("Path length: " + std::to_string(bfs.getShortDist()) +
+                                      "\nTime spent: " + floatToString(bfs.getWorkTime(), 3),
+                                      sf::Color::Blue);
                 break;
 
             case STATUS::FAIL:
                 startBfsButtonIsPressed = false;
+                menu.setBfsInfo("The path could\nnot be found!", sf::Color::Red);
                 break;
 
             case STATUS::PROCESS:
@@ -35,7 +37,10 @@ void App::run()
     BFS bfs(map);
 
     Menu menu({mMenuW, mMenuH}, mWindow);
-    menu.setupTitle("INFO");
+    menu.setTitle("<INFO>");
+    menu.setBfsInfo("Path length: \nTime spent: ", sf::Color::Blue);
+    menu.setButtonStartBfs();
+    menu.setButtonExit();
 
     while (mWindow.isOpen())
     {
@@ -44,14 +49,8 @@ void App::run()
             if (event.type == sf::Event::Closed)
                 mWindow.close();
 
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+            if (exitButtonIsPressed)
                 mWindow.close();
-
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::W)
-                startBfsButtonIsPressed = true;
-
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space)
-                startBfsButtonIsPressed = false;
         }
 
         this->logic(bfs, menu);
@@ -59,6 +58,7 @@ void App::run()
         mWindow.clear(fontColor);
 
         map.inputUser();
+        menu.inputUser(startBfsButtonIsPressed, exitButtonIsPressed);
 
         menu.draw();
         map.draw();
