@@ -56,12 +56,12 @@ public:
         return finish;
     }
 
-    [[nodiscard]] CELL getCell(sf::Vector2i cellPos) const
+    [[nodiscard]] CELL getCell(const sf::Vector2i& cellPos) const
     {
         return map[cellPos.y][cellPos.x];
     }
 
-    void setCell(sf::Vector2i pos, CELL typeCell)
+    void setCell(const sf::Vector2i& pos, CELL typeCell)
     {
         if (pos != start && pos != finish)
             map[pos.y][pos.x] = typeCell;
