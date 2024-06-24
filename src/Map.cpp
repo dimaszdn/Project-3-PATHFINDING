@@ -14,8 +14,6 @@ sf::Vector2i Map::getCellPos()
 
 void Map::inputUser()
 {
-    //то что здесь при индексации идет сначала координата y,
-    //а затем x - это нормально (просто вектор так создан)
     auto cellPos = this->getCellPos();
     if (cellPos.x != -1 && cellPos.y != -1)
     {

@@ -10,16 +10,12 @@ class Map
 {
 private:
     std::vector<std::vector<CELL>> map{};
-
     sf::RenderWindow& mWindow;
-
     bool blockStart{};
     bool blockFinish{};
-
     int cellSize{};
     size_t mapSizeY{};
     size_t mapSizeX{};
-
     sf::Vector2i start{};
     sf::Vector2i finish{};
 
