@@ -72,3 +72,20 @@ void Menu::setButtonExit()
     }
 }
 
+void Menu::setButtonManual()
+{
+    try
+    {
+        manualButton.setup({300, 100}, sf::Color::White);
+        manualButton.setText("Manual", 100 / 2, sf::Color::Blue);
+
+        float x = mWindow.getSize().x - mMenuSize.x;
+        float y = 690;
+        manualButton.setPosition({x, y});
+        manualButton.centerByWidth(mMenuSize.x);
+    }
+    catch (const std::exception& ex)
+    {
+        std::cout << ex.what() << "\n";
+    }
+}
