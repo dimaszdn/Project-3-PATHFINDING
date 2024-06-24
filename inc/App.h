@@ -18,6 +18,7 @@ private:
     int mMenuH{};
     bool startBfsButtonIsPressed = false;
     bool exitButtonIsPressed = false;
+    bool manualButtonIsPressed = false;
 
 public:
     App() = default;

@@ -32,7 +32,6 @@ void App::logic(BFS& bfs, Menu& menu)
 
 void App::run()
 {
-
     Map map(mWindow, mMenuW);
     BFS bfs(map);
 
@@ -41,6 +40,7 @@ void App::run()
     menu.setBfsInfo("Path length: \nTime spent: ", sf::Color::Blue);
     menu.setButtonStartBfs();
     menu.setButtonExit();
+    menu.setButtonManual();
 
     while (mWindow.isOpen())
     {
@@ -58,7 +58,7 @@ void App::run()
         mWindow.clear(fontColor);
 
         map.inputUser();
-        menu.inputUser(startBfsButtonIsPressed, exitButtonIsPressed);
+        menu.inputUser(startBfsButtonIsPressed, exitButtonIsPressed, manualButtonIsPressed);
 
         menu.draw();
         map.draw();
